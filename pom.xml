@@ -125,11 +125,22 @@
             <artifactId>jjwt-jackson</artifactId> <!-- for JSON processing -->
             <version>0.12.5</version>
         </dependency>
+        <!--    .env로드    -->
+        <dependency>
+            <groupId>me.paulschwarz</groupId>
+            <artifactId>spring-dotenv</artifactId>
+            <version>4.0.0</version>
+        </dependency>
     </dependencies>
         <repositories>
             <repository>
                 <id>jjwt-repository</id>
                 <url>https://repo1.maven.org/maven2</url>
+            </repository>
+            <repository>
+                <id>jitpack.io</id>
+                <url>https://jitpack.io</url>
+                <layout>default</layout>
             </repository>
         </repositories>
 
