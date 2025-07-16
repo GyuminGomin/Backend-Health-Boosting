@@ -15,7 +15,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
-            SecurityFilterChain oauth2SecurityFilterChain,
             CustomOAuth2SuccessHandler customOAuth2SuccessHandler,
             CustomOAuth2FailureHandler customOAuth2FailureHandler,
             JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
@@ -28,7 +27,8 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/swagger-resources/**",
                                 "/webjars/**",
-                                "/api/**"
+                                "/api/**",
+                                "/oauth2/**"
                         ).permitAll()  // Swagger는 모두 허용
                         .anyRequest().authenticated()  // 나머지는 인증 필요
                 )
