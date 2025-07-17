@@ -36,3 +36,4 @@ build/
 # myself
 .env
 /src/main/resources/application-*.yml
+study.md

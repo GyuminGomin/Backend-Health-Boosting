@@ -1,4 +1,4 @@
-package com.test.healthboosting.login.controller;
+package com.test.healthboosting.loginapi.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
