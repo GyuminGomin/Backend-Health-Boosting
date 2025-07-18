@@ -46,7 +46,8 @@ VALUES
  #{profileImageUrl},
  #{role},
  NOW(),
- NOW()
+ NOW(),
+ #{birthday}
 )
 ON DUPLICATE KEY UPDATE
 email = VALUES(email),
