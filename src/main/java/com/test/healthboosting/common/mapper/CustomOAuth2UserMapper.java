@@ -1,5 +1,6 @@
 package com.test.healthboosting.common.mapper;
 
+import com.test.healthboosting.loginapi.dto.MemberDTO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -36,7 +37,7 @@ VALUES
 (
  #{loginType},
  #{oauthProvider},
- #{oauthProvideId},
+ #{oauthProviderId},
  #{userId},
  #{password},
  #{phoneNumber},
@@ -56,5 +57,5 @@ profile_image_url = VALUES(profile_image_url),
 dt_update = NOW()
 
     """)
-    public Integer insertUser();
+    public void insertUser(MemberDTO memberDTO);
 }

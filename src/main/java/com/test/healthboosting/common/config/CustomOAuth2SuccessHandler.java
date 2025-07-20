@@ -33,6 +33,8 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
         String token = jwtTokenProvider.createToken(userId, roles);
 
+
+
         // 프론트로 리다이렉트
         response.sendRedirect("http://localhost:5173/oauth2-success?token="+ token);
     }
