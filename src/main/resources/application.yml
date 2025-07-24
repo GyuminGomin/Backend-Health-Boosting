@@ -28,6 +28,10 @@ spring:
     restart:
       exclude:
       additional-paths: src/main/java
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 springdoc:
   api-docs:

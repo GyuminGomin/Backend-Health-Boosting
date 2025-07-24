@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.test</groupId>
     <artifactId>health-boosting</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.0</version>
     <name>health-boosting</name>
     <description>health-boosting</description>
     <url/>
@@ -130,6 +130,11 @@
             <groupId>io.github.cdimascio</groupId>
             <artifactId>dotenv-java</artifactId>
             <version>3.0.0</version>
+        </dependency>
+        <!--    Redis    -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
         <repositories>

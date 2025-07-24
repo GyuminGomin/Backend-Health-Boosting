@@ -14,3 +14,11 @@ User Attributes: [
     }
 ]
 ```
+
+
+# 도커 관련
+## 도커 파일 만들기
+```
+- docker redis 테스트
+docker run -d --name redis-test -p 6379:6379 redis
+```
