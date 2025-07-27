@@ -20,7 +20,7 @@ logging:
 
 spring:
   profiles:
-    active: env, db, oauth
+    active: env, db, oauth, mail
   output:
     ansi:
       enabled: ALWAYS

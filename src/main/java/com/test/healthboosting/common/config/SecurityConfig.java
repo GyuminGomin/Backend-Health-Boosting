@@ -27,7 +27,8 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/swagger-resources/**",
                                 "/webjars/**",
-                                "/api/**",
+                                "/api/signup/*",
+                                "/api/login/*",
                                 "/oauth2/**"
                         ).permitAll()  // Swagger는 모두 허용
                         .anyRequest().authenticated()  // 나머지는 인증 필요
