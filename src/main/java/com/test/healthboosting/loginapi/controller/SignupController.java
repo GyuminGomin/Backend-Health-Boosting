@@ -14,12 +14,11 @@ public class SignupController {
 
     private final SignupService ss;
 
-    // DB로 처리하는 방식으로 가자
     @PostMapping("/send-verification")
     public ResponseEntity<?> sendVerification(@RequestBody EmailRequest emailRequest) {
 
         String code = ss.generateRandomCode(); // 6자리 숫자
-        ss.saveVerificationCode(emailRequest.getEmail(), code);
+        ss.saveEmailVerificationCode(emailRequest.getEmail(), code);
 
         ss.sendVerificationEmail(emailRequest.getEmail(), code);
 
@@ -29,7 +28,7 @@ public class SignupController {
     @PostMapping("/verify-code")
     public ResponseEntity<?> verifyCode(@RequestBody EmailRequest emailRequest) {
 
-        boolean result = ss.verifyCode(emailRequest.getEmail(), emailRequest.getCode());
+        boolean result = ss.verifyEmailCode(emailRequest.getEmail(), emailRequest.getCode());
         return result
                 ? ResponseEntity.ok("Email Verified.")
                 : ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired code.");
@@ -41,5 +40,7 @@ public class SignupController {
         ss.deleteVerificationCode(email);
         return ResponseEntity.ok("Verification Code Canceled.");
     }
+
+
 
 }
