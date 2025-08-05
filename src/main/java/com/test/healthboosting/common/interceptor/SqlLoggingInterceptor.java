@@ -56,7 +56,8 @@ public class SqlLoggingInterceptor implements Interceptor {
                     📍 서비스: {}
                     📍 쿼리: {}
                     🕒 실행 시간: {}ms
-                    📄 SQL: {}
+                    📄 SQL: 
+                    {}
                     🔧 파라미터: {}
                     📤 결과: {}
                     ============================================

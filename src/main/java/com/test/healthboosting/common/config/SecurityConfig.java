@@ -1,6 +1,6 @@
 package com.test.healthboosting.common.config;
 
-import jakarta.servlet.http.HttpServletResponse;
+import com.test.healthboosting.common.filter.CustomExceptionTranslationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,7 +17,7 @@ public class SecurityConfig {
             HttpSecurity http,
             CustomOAuth2SuccessHandler customOAuth2SuccessHandler,
             CustomOAuth2FailureHandler customOAuth2FailureHandler,
-            JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
+            JwtAuthenticationFilter jwtAuthenticationFilter, CustomExceptionTranslationFilter customExceptionTranslationFilter) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(
@@ -39,17 +39,21 @@ public class SecurityConfig {
                 // 세션 없이 Stateless로 인증
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // 예외 핸들러 설정 (401 응답 반환)
-                .exceptionHandling(exceptions -> exceptions.authenticationEntryPoint((request, response, authException) -> {
-                    response.setContentType("application/json");
-                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401
-                    response.getWriter().write("{\"message\":\"Unauthorized\"}");
-                }))
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .authenticationEntryPoint((req, res, authException) -> {
+                            throw authException;
+                        })
+                        .accessDeniedHandler((req, res, accessDeniedException) -> {
+                            throw accessDeniedException;
+                        }))
+
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("http://localhost:5173") // 로그인 페이지
                         .successHandler(customOAuth2SuccessHandler) // 로그인 성공 시 JWT 발급 등 처리
                         .failureHandler(customOAuth2FailureHandler)); // 로그인 실패 시 처리
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class); // 토큰을 헤더에서 읽어 인증 처리까지
+        http.addFilterAfter(customExceptionTranslationFilter, UsernamePasswordAuthenticationFilter.class);
 
 
         return http.build();
